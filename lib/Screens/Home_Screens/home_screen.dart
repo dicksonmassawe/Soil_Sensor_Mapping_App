@@ -9,12 +9,17 @@ import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/conduct
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/humidity_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/nitrogen_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/ph_screen.dart';
-import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorous_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorus_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/potassium_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/temperature_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/setting_screen.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+
+Map<String, dynamic> sensor = {};
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +29,62 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Timer _timer;
+
+  double ph = 7.0;
+  double alititude = 0.0;
+  double latitude = 0.0;
+  double longitude = 0.0;
+  double nitrogen = 0.0;
+  double phosphorus = 0.0;
+  double potassium = 0.0;
+  double conductivity = 0.0;
+  double temperature = 0.0;
+  double humidity = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initial API call
+    apicall();
+    // Setting up a periodic timer for API updates every 30 seconds
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      apicall();
+    });
+  }
+
+  @override
+  void dispose() {
+    // Dispose the timer when the widget is disposed
+    _timer.cancel();
+    super.dispose();
+  }
+
+  Future apicall() async {
+    http.Response response;
+    response = await http.get(Uri.parse(
+        "http://45.61.55.203:9090/api/v1/XAjieqa2LNFTIvyasBki/attributes?clientKeys="));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        // Parse the JSON data
+        sensor = json.decode(response.body);
+
+        // Access the specific parameter
+        alititude = (sensor['client']['altitude'] as num).toDouble();
+        latitude = (sensor['client']['latitude'] as num).toDouble();
+        longitude = (sensor['client']['longitude'] as num).toDouble();
+        ph = (sensor['client']['ph'] as num).toDouble();
+        temperature = (sensor['client']['temperature'] as num).toDouble();
+        humidity = (sensor['client']['humidity'] as num).toDouble();
+        conductivity = (sensor['client']['conductivity'] as num).toDouble();
+        nitrogen = (sensor['client']['nitrogen'] as num).toDouble();
+        phosphorus = (sensor['client']['phosphorus'] as num).toDouble();
+        potassium = (sensor['client']['potassium'] as num).toDouble();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Container width
@@ -142,9 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            pointers: const [
+                            pointers: [
                               Pointer(
-                                value: 7.0,
+                                value: ph,
                                 height: 15,
                                 shape: PointerShape.triangle,
                                 color: Colors.black,
@@ -259,15 +320,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 50,
+                                value: temperature,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   '°C',
                                   style: TextStyle(
@@ -280,8 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '90.0',
-                                  style: TextStyle(
+                                  temperature.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,
@@ -370,15 +431,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 50,
+                                value: humidity,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   '%',
                                   style: TextStyle(
@@ -391,8 +452,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '90.0',
-                                  style: TextStyle(
+                                  humidity.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,
@@ -490,15 +551,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 50,
+                                value: conductivity,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   'dS/m',
                                   style: TextStyle(
@@ -511,8 +572,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '90.0',
-                                  style: TextStyle(
+                                  conductivity.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,
@@ -601,15 +662,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 500,
+                                value: nitrogen,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   'mg/kg',
                                   style: TextStyle(
@@ -622,8 +683,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '500',
-                                  style: TextStyle(
+                                  nitrogen.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,
@@ -646,7 +707,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Phosphorous
+                    // phosphorus
                     Container(
                       height: containerWidth,
                       width: containerWidth,
@@ -663,7 +724,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: SfRadialGauge(
                         title: const GaugeTitle(
-                          text: 'Phosphorous',
+                          text: 'phosphorus',
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
@@ -694,7 +755,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onAxisTapped: (value) {
                               Navigator.of(context).push(PageTransition(
                                 type: PageTransitionType.fade,
-                                child: const PhosphorousScreen(),
+                                child: const PhosphorusScreen(),
                                 duration:
                                     Duration(milliseconds: transitionTime),
                                 reverseDuration:
@@ -721,15 +782,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 500,
+                                value: phosphorus,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   'mg/kg',
                                   style: TextStyle(
@@ -742,8 +803,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '500',
-                                  style: TextStyle(
+                                  phosphorus.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,
@@ -832,15 +893,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   startWidth: 10,
                                   endWidth: 10)
                             ],
-                            pointers: const [
+                            pointers: [
                               MarkerPointer(
-                                value: 500,
+                                value: potassium,
                                 markerHeight: 15,
                                 color: Colors.black,
                               ),
                             ],
-                            annotations: const <GaugeAnnotation>[
-                              GaugeAnnotation(
+                            annotations: <GaugeAnnotation>[
+                              const GaugeAnnotation(
                                 widget: Text(
                                   'mg/kg',
                                   style: TextStyle(
@@ -853,8 +914,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               GaugeAnnotation(
                                 widget: Text(
-                                  '500.0',
-                                  style: TextStyle(
+                                  potassium.toString(),
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Palettes.textColor6,

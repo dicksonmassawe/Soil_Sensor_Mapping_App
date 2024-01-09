@@ -5,14 +5,14 @@ import 'package:sensor_mapping/Constants/my_utility.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/nitrogen_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/potassium_screen.dart';
 
-class PhosphorousScreen extends StatefulWidget {
-  const PhosphorousScreen({super.key});
+class PhosphorusScreen extends StatefulWidget {
+  const PhosphorusScreen({super.key});
 
   @override
-  State<PhosphorousScreen> createState() => _PhosphorousScreenState();
+  State<PhosphorusScreen> createState() => _PhosphorusScreenState();
 }
 
-class _PhosphorousScreenState extends State<PhosphorousScreen> {
+class _PhosphorusScreenState extends State<PhosphorusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +43,7 @@ class _PhosphorousScreenState extends State<PhosphorousScreen> {
                       ),
                     ),
                     Text(
-                      'Phosphorous Graph',
+                      'Phosphorus Graph',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.normal,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sensor_mapping/Constants/my_utility.dart';
-import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorous_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorus_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/home_screen.dart';
 
 class PotassiumScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _PotassiumScreenState extends State<PotassiumScreen> {
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).push(PageTransition(
-                          child: const PhosphorousScreen(),
+                          child: const PhosphorusScreen(),
                           type: PageTransitionType.leftToRight,
                           duration: Duration(milliseconds: transitionTime),
                           reverseDuration: Duration(seconds: transitionTime),

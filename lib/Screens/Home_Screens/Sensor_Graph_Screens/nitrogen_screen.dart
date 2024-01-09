@@ -3,7 +3,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sensor_mapping/Constants/my_utility.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/conductivity_screen.dart';
-import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorous_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorus_screen.dart';
 
 class NitrogenScreen extends StatefulWidget {
   const NitrogenScreen({super.key});
@@ -56,7 +56,7 @@ class _NitrogenScreenState extends State<NitrogenScreen> {
                         // Navigate to Login screen
                         Navigator.of(context).push(PageTransition(
                           type: PageTransitionType.rightToLeft,
-                          child: const PhosphorousScreen(),
+                          child: const PhosphorusScreen(),
                           duration: Duration(milliseconds: transitionTime),
                           reverseDuration:
                               Duration(milliseconds: transitionTime),
