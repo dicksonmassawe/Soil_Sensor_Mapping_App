@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "473259466067",
+    "project_id": "soil-sensor-mapper",
+    "storage_bucket": "soil-sensor-mapper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473259466067:android:0198f1d064f30cbdd455a6",
+        "android_client_info": {
+          "package_name": "com.example.sensor_mapping"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7-RxrCtdcfxUGFoyIqTdPniZOSh2oppk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
