@@ -5,6 +5,13 @@ import 'package:page_transition/page_transition.dart';
 import 'package:sensor_mapping/Constants/color_palettes.dart';
 import 'package:sensor_mapping/Constants/my_utility.dart';
 import 'package:sensor_mapping/Screens/Authetication_Screens/login_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/conductivity_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/humidity_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/nitrogen_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/ph_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/phosphorous_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/potassium_screen.dart';
+import 'package:sensor_mapping/Screens/Home_Screens/Sensor_Graph_Screens/temperature_screen.dart';
 import 'package:sensor_mapping/Screens/Home_Screens/setting_screen.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:geekyants_flutter_gauges/geekyants_flutter_gauges.dart';
@@ -99,20 +106,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            'pH',
-                            style: TextStyle(
-                              fontSize:
-                                  20, // You can adjust the font size as needed
-                              fontWeight: FontWeight.bold,
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const PhScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
+                            child: const Text(
+                              'pH',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Palettes.textColor6,
+                              ),
                             ),
                           ),
-                          const SizedBox(
-                              height:
-                                  10), // Adjust the spacing between the title and the gauge
-
+                          // const SizedBox(height: 10),
                           LinearGauge(
                             start: 1,
                             end: 14,
@@ -189,6 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
+                            color: Palettes.textColor6,
                           ),
                         ),
                         axes: <RadialAxis>[
@@ -209,6 +226,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const TemperatureScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
@@ -254,6 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
+                                    color: Palettes.textColor6,
                                   ),
                                 ),
                                 angle: 90,
@@ -285,6 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
+                            color: Palettes.textColor6,
                           ),
                         ),
                         axes: <RadialAxis>[
@@ -305,6 +337,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const HumidityScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
@@ -350,6 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
+                                    color: Palettes.textColor6,
                                   ),
                                 ),
                                 angle: 90,
@@ -390,6 +436,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
+                            color: Palettes.textColor6,
                           ),
                         ),
                         axes: <RadialAxis>[
@@ -410,6 +457,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const ConductivityScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
@@ -455,6 +515,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
+                                    color: Palettes.textColor6,
                                   ),
                                 ),
                                 angle: 90,
@@ -486,6 +547,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
+                            color: Palettes.textColor6,
                           ),
                         ),
                         axes: <RadialAxis>[
@@ -506,6 +568,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const NitrogenScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
@@ -551,6 +626,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
+                                    color: Palettes.textColor6,
                                   ),
                                 ),
                                 angle: 90,
@@ -591,6 +667,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
+                            color: Palettes.textColor6,
                           ),
                         ),
                         axes: <RadialAxis>[
@@ -611,6 +688,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const PhosphorousScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
@@ -656,6 +746,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
+                                    color: Palettes.textColor6,
                                   ),
                                 ),
                                 angle: 90,
@@ -708,6 +799,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.blue,
                               thickness: 1,
                             ),
+                            axisLabelStyle: const GaugeTextStyle(
+                              color: Palettes.textColor6,
+                            ),
+                            onAxisTapped: (value) {
+                              Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const PotassiumScreen(),
+                                duration:
+                                    Duration(milliseconds: transitionTime),
+                                reverseDuration:
+                                    Duration(milliseconds: transitionTime),
+                              ));
+                            },
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
