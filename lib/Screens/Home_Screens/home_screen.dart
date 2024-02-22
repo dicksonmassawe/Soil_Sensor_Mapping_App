@@ -614,7 +614,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2000,
+                            maximum: 0.02,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -645,19 +645,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 100,
+                                  endValue: 0.004,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 100,
-                                  endValue: 500,
+                                  startValue: 0.004,
+                                  endValue: 0.008,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 500,
-                                  endValue: 2000,
+                                  startValue: 0.008,
+                                  endValue: 0.02,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -672,7 +672,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  'mg/kg',
+                                  '%',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
@@ -734,7 +734,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2000,
+                            maximum: 0.02,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -765,19 +765,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 100,
+                                  endValue: 0.004,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 100,
-                                  endValue: 500,
+                                  startValue: 0.004,
+                                  endValue: 0.008,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 500,
-                                  endValue: 2000,
+                                  startValue: 0.008,
+                                  endValue: 0.02,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -792,7 +792,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  'mg/kg',
+                                  '%',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
@@ -845,7 +845,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2000,
+                            maximum: 0.02,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -876,19 +876,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 100,
+                                  endValue: 0.004,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 100,
-                                  endValue: 500,
+                                  startValue: 0.004,
+                                  endValue: 0.008,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 500,
-                                  endValue: 2000,
+                                  startValue: 0.008,
+                                  endValue: 0.02,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -903,7 +903,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  'mg/kg',
+                                  '%',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
