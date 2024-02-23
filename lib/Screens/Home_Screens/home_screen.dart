@@ -724,7 +724,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: SfRadialGauge(
                         title: const GaugeTitle(
-                          text: 'phosphorus',
+                          text: 'Phosphorus',
                           textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
