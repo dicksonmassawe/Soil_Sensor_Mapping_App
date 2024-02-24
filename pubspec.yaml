@@ -30,6 +30,7 @@ environment:
 dependencies:
   firebase_auth: ^4.15.3
   firebase_core: ^2.24.2
+  fl_chart: ^0.66.2
   flutter:
     sdk: flutter
   flutter_remix: ^0.0.3

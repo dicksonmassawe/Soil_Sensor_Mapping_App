@@ -614,7 +614,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 0.02,
+                            maximum: 2,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -645,19 +645,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.004,
+                                  endValue: 0.4,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.004,
-                                  endValue: 0.008,
+                                  startValue: 0.4,
+                                  endValue: 0.8,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.008,
-                                  endValue: 0.02,
+                                  startValue: 0.8,
+                                  endValue: 2,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -734,7 +734,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 0.02,
+                            maximum: 2,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -765,19 +765,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.004,
+                                  endValue: 0.4,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.004,
-                                  endValue: 0.008,
+                                  startValue: 0.4,
+                                  endValue: 0.8,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.008,
-                                  endValue: 0.02,
+                                  startValue: 0.8,
+                                  endValue: 2,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -845,7 +845,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 0.02,
+                            maximum: 2,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -876,19 +876,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.004,
+                                  endValue: 0.4,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.004,
-                                  endValue: 0.008,
+                                  startValue: 0.4,
+                                  endValue: 0.8,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.008,
-                                  endValue: 0.02,
+                                  startValue: 0.8,
+                                  endValue: 2,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
