@@ -193,6 +193,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               validator: emailValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(
                                   FlutterRemix.mail_check_line,
@@ -226,6 +228,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.text,
                               validator: passwordValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(
                                   Icons.lock_open,

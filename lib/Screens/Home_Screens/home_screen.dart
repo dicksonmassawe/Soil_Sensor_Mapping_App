@@ -41,6 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
   double conductivity = 0.0;
   double temperature = 0.0;
   double humidity = 0.0;
+  int year = 2024;
+  int month = 01;
+  String day = "Sunday";
+  int date = 01;
+  int hour = 01;
+  int minute = 01;
+  String fMonth = "";
+  String fDate = "";
+  String fHour = "";
+  String fMinute = "";
 
   @override
   void initState() {
@@ -81,6 +91,16 @@ class _HomeScreenState extends State<HomeScreen> {
         nitrogen = (sensor['client']['nitrogen'] as num).toDouble();
         phosphorus = (sensor['client']['phosphorus'] as num).toDouble();
         potassium = (sensor['client']['potassium'] as num).toDouble();
+        year = (sensor['client']['year'] as num).toInt();
+        month = (sensor['client']['month'] as num).toInt();
+        fMonth = month < 10 ? '0$month' : '$month';
+        day = sensor['client']['day'];
+        date = (sensor['client']['date'] as num).toInt();
+        fDate = date < 10 ? '0$date' : '$date';
+        hour = (sensor['client']['hour'] as num).toInt();
+        fHour = hour < 10 ? '0$hour' : '$hour';
+        minute = (sensor['client']['minute'] as num).toInt();
+        fMinute = minute < 10 ? '0$minute' : '$minute';
       });
     }
   }
@@ -146,7 +166,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      '$day, $fHour:$fMinute',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300,
+                        fontStyle: FontStyle.italic,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
+                    Text(
+                      '$fDate/$fMonth/$year ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300,
+                        fontStyle: FontStyle.italic,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 // Sensor value containers
                 Row(

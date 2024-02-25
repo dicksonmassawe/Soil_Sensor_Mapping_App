@@ -179,6 +179,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               validator: emailValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(
                                   FlutterRemix.mail_settings_line,

@@ -202,6 +202,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               validator: emailValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(
                                   FlutterRemix.mail_add_line,
@@ -235,6 +237,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.text,
                               validator: passwordValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(
                                   Icons.lock_open,
@@ -284,6 +288,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.text,
                               validator: comfirmPasswordValidator,
+                              style:
+                                  const TextStyle(color: Palettes.textColor6),
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(
                                   Icons.lock_open,
