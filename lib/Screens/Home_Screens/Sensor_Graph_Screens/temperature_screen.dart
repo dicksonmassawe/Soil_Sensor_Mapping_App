@@ -30,7 +30,10 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).push(PageTransition(
-                          child: const PhScreen(),
+                          child: const PhScreen(
+                            ph: 14,
+                            second: 0.0,
+                          ),
                           type: PageTransitionType.leftToRight,
                           duration: Duration(milliseconds: transitionTime),
                           reverseDuration: Duration(seconds: transitionTime),

@@ -43,14 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
   double humidity = 0.0;
   int year = 2024;
   int month = 01;
-  String day = "Sunday";
-  int date = 01;
+  int day = 0;
   int hour = 01;
   int minute = 01;
-  String fMonth = "";
-  String fDate = "";
-  String fHour = "";
-  String fMinute = "";
+  double second = 0;
 
   @override
   void initState() {
@@ -73,34 +69,43 @@ class _HomeScreenState extends State<HomeScreen> {
   Future apicall() async {
     http.Response response;
     response = await http.get(Uri.parse(
-        "http://45.61.55.203:9090/api/v1/XAjieqa2LNFTIvyasBki/attributes?clientKeys="));
+        "https://api.thingspeak.com/channels/2557412/feeds.json?api_key=PISP90330RUOU758&results=1"));
 
     if (response.statusCode == 200) {
       setState(() {
         // Parse the JSON data
         sensor = json.decode(response.body);
 
+        // Extract the fields
+        var feeds = sensor['feeds'][0];
+
         // Access the specific parameter
-        alititude = (sensor['client']['altitude'] as num).toDouble();
-        latitude = (sensor['client']['latitude'] as num).toDouble();
-        longitude = (sensor['client']['longitude'] as num).toDouble();
-        ph = (sensor['client']['ph'] as num).toDouble();
-        temperature = (sensor['client']['temperature'] as num).toDouble();
-        humidity = (sensor['client']['humidity'] as num).toDouble();
-        conductivity = (sensor['client']['conductivity'] as num).toDouble();
-        nitrogen = (sensor['client']['nitrogen'] as num).toDouble();
-        phosphorus = (sensor['client']['phosphorus'] as num).toDouble();
-        potassium = (sensor['client']['potassium'] as num).toDouble();
-        year = (sensor['client']['year'] as num).toInt();
-        month = (sensor['client']['month'] as num).toInt();
-        fMonth = month < 10 ? '0$month' : '$month';
-        day = sensor['client']['day'];
-        date = (sensor['client']['date'] as num).toInt();
-        fDate = date < 10 ? '0$date' : '$date';
-        hour = (sensor['client']['hour'] as num).toInt();
-        fHour = hour < 10 ? '0$hour' : '$hour';
-        minute = (sensor['client']['minute'] as num).toInt();
-        fMinute = minute < 10 ? '0$minute' : '$minute';
+        ph = double.parse(feeds['field4']);
+        temperature = double.parse(feeds['field2']);
+        humidity = double.parse(feeds['field1']);
+        conductivity = double.parse(feeds['field3']);
+        nitrogen = double.parse(feeds['field5']);
+        phosphorus = double.parse(feeds['field6']);
+        potassium = double.parse(feeds['field7']);
+
+        // The given UTC time string
+        String utcTimeString = feeds['created_at'];
+
+        // Parse the UTC time string to a DateTime object
+        DateTime utcDateTime = DateTime.parse(utcTimeString);
+
+        // Define the timezone offset for East Africa Time (EAT) which is UTC+3
+        Duration offset = const Duration(hours: 3);
+
+        // Convert the UTC time to local time by adding the offset
+        DateTime localDateTime = utcDateTime.add(offset);
+
+        year = localDateTime.year;
+        month = localDateTime.month;
+        day = localDateTime.day;
+        hour = localDateTime.hour;
+        minute = localDateTime.minute;
+        second = localDateTime.second.toDouble();
       });
     }
   }
@@ -172,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      '$day, $fHour:$fMinute',
+                      '$hour:$minute',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w300,
@@ -181,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Text(
-                      '$fDate/$fMonth/$year ',
+                      '$day/$month/$year ',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w300,
@@ -219,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onPressed: () {
                               Navigator.of(context).push(PageTransition(
                                 type: PageTransitionType.fade,
-                                child: const PhScreen(),
+                                child: PhScreen(ph: ph, second: second),
                                 duration:
                                     Duration(milliseconds: transitionTime),
                                 reverseDuration:
@@ -487,7 +492,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  '%',
+                                  '% RH',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
@@ -549,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 100,
+                            maximum: 10,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -586,13 +591,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   endWidth: 10),
                               GaugeRange(
                                   startValue: 4,
-                                  endValue: 10,
+                                  endValue: 8,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 10,
-                                  endValue: 100,
+                                  startValue: 8,
+                                  endValue: 10,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -660,7 +665,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2,
+                            maximum: 0.2,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -691,19 +696,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.4,
+                                  endValue: 0.1,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.4,
-                                  endValue: 0.8,
+                                  startValue: 0.1,
+                                  endValue: 0.18,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.8,
-                                  endValue: 2,
+                                  startValue: 0.18,
+                                  endValue: 0.2,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -780,7 +785,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2,
+                            maximum: 2000,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -811,19 +816,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.4,
+                                  endValue: 7,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.4,
-                                  endValue: 0.8,
+                                  startValue: 7,
+                                  endValue: 20,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.8,
-                                  endValue: 2,
+                                  startValue: 20,
+                                  endValue: 2000,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -838,7 +843,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  '%',
+                                  'mg/kg',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
@@ -891,7 +896,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         axes: <RadialAxis>[
                           RadialAxis(
                             minimum: 0,
-                            maximum: 2,
+                            maximum: 5,
                             startAngle: 140,
                             endAngle: 40,
                             showLastLabel: true,
@@ -922,19 +927,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             ranges: <GaugeRange>[
                               GaugeRange(
                                   startValue: 0,
-                                  endValue: 0.4,
+                                  endValue: 0.3,
                                   color: Colors.red,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.4,
-                                  endValue: 0.8,
+                                  startValue: 0.3,
+                                  endValue: 0.7,
                                   color: Colors.orange,
                                   startWidth: 10,
                                   endWidth: 10),
                               GaugeRange(
-                                  startValue: 0.8,
-                                  endValue: 2,
+                                  startValue: 0.7,
+                                  endValue: 5,
                                   color: Colors.green,
                                   startWidth: 10,
                                   endWidth: 10)
@@ -949,7 +954,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             annotations: <GaugeAnnotation>[
                               const GaugeAnnotation(
                                 widget: Text(
-                                  '%',
+                                  'cmol(+)/kg',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.blue,
